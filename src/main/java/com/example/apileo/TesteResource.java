@@ -20,8 +20,6 @@ public class TesteResource {
 
     private final Logger logger = LoggerFactory.getLogger(TesteResource.class);
 
-    @Autowired
-    PlayerRepository playerRepository;
 
     @CrossOrigin
     @GetMapping("/hello")
@@ -34,7 +32,6 @@ public class TesteResource {
     public ResponseEntity<Player> helloPost(
             @RequestBody @Valid Player testeEntity) {
         logger.info("m=testeEntity, request={}", testeEntity);
-        playerRepository.save(testeEntity);
         return ResponseEntity.ok(testeEntity);
     }
 }
