@@ -21,7 +21,7 @@ public class TesteResource {
     private final Logger logger = LoggerFactory.getLogger(TesteResource.class);
 
     @Autowired
-    MongoTemplate mongoTemplate;
+    PlayerRepository playerRepository;
 
     @CrossOrigin
     @GetMapping("/hello")
@@ -34,7 +34,7 @@ public class TesteResource {
     public ResponseEntity<Player> helloPost(
             @RequestBody @Valid Player testeEntity) {
         logger.info("m=testeEntity, request={}", testeEntity);
-        mongoTemplate.save(testeEntity);
+        playerRepository.save(testeEntity);
         return ResponseEntity.ok(testeEntity);
     }
 }
