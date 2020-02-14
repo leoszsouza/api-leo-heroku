@@ -8,6 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class PlayerEntity {
 
+    PlayerEntity(){
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -56,4 +60,7 @@ public class PlayerEntity {
         this.idade = idade;
         this.idSofifa = idSofifa;
     }
+
+
+
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.function.Function;
 
 @RestController
 @RequestMapping(value = "/v1/test")
@@ -31,7 +33,16 @@ public class TesteResource {
     public ResponseEntity<Player> helloPost(
             @RequestBody @Valid Player testeEntity) {
         logger.info("m=testeEntity, request={}", testeEntity);
-        playerRepository.save(new PlayerEntity("leo", 10, 0L));
+        playerRepository.save(buildEntityfromREquest.apply(testeEntity));
         return ResponseEntity.ok(testeEntity);
     }
+
+    @CrossOrigin
+    @GetMapping(value = "/helloList")
+    public ResponseEntity<List<PlayerEntity>> helloList() {
+        return ResponseEntity.ok(playerRepository.findAll());
+    }
+
+    private Function<Player, PlayerEntity> buildEntityfromREquest = player ->
+            new PlayerEntity(player.nome, player.idade, player.idSofifa);
 }
